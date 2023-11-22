@@ -2,6 +2,7 @@ from django.db import models
 from utils.models import BaseModel
 from django.contrib.auth import get_user_model
 from users.models import User
+from django.utils.html import mark_safe
 # Create your models here.
 User = get_user_model()
 
@@ -15,6 +16,7 @@ class Category(BaseModel):
     ads_count = models.IntegerField(default=0)
 
 
+    
 class SubCategory(BaseModel):
     title = models.CharField(max_length=255)
 
@@ -48,6 +50,15 @@ class Ads(BaseModel):
 
     def get_address_text(self):
         return f"{self.district.region.title}, {self.district.title}"
+    
+    # def price_count(self):
+    #      return self.price.count()
+
+class AdsProxy(Ads):
+
+    class Meta:
+        proxy = True
+
 
 
 class AdsAttributeValue(BaseModel):
@@ -58,9 +69,19 @@ class AdsAttributeValue(BaseModel):
     )
     attribute = models.ForeignKey("attribute.Attribute", on_delete=models.CASCADE)
 
+    
 
+class AdsAttributeValueProxy(Ads):
+    
+    class Meta:
+        
+        proxy = True
 class AdsAttributeValueOption(BaseModel):
     ads_attribute_value = models.ForeignKey(
         AdsAttributeValue, on_delete=models.CASCADE, related_name="value_options"
     )
     option = models.ForeignKey("attribute.AttributeOption", on_delete=models.CASCADE)
+
+
+    # class Meta:
+    #     db_name='ads_attribute_value_option_show'
