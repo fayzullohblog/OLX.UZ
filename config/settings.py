@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    # 'jazzmin',
+    'multi_captcha_admin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    'snowpenguin.django.recaptcha2',
 
     'users',
     'userprofile',
@@ -63,7 +66,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates/')],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -78,6 +81,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'recaptcha2',
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -143,3 +149,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL='users.User'
+RECAPTCHA_PUBLIC_KEY = '6LdefRkpAAAAAM_MXQjhuEPFGBQtMt3-WKm5tj1m'
+RECAPTCHA_PRIVATE_KEY = '6LdefRkpAAAAACkE9it-lT7f4fDHeid5qvTNzpuN'
+NOCAPTCHA = False
