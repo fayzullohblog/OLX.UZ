@@ -10,15 +10,15 @@ class User(AbstractUser):
 
     password=models.CharField(max_length=50)
     email=models.EmailField(unique=True)
-    _phone_number=RegexValidator(
-            regex=r'^9989[0-9]{9}',
-            message="Telefon raqamingiz 9 bilan boshlanishi va 12 ta belgidan iborat bo'lishi kerak. Masalan: 998901235476",
-                                )
-    phone_number=models.CharField(
-        max_length=20,
-        validators=[_phone_number],
-        unique=True
-    )
+    # _phone_number=RegexValidator(
+    #         regex=r'^9989[0-9]{9}',
+    #         message="Telefon raqamingiz 9 bilan boshlanishi va 12 ta belgidan iborat bo'lishi kerak. Masalan: 998901235476",
+    #                             )
+    # phone_number=models.CharField(
+    #     max_length=20,
+    #     validators=[_phone_number],
+    #     unique=True
+    # )
 
     facecook=models.URLField(max_length=250)
     google=models.URLField(max_length=250)
@@ -27,6 +27,7 @@ class User(AbstractUser):
     state=models.BooleanField(default=False)
 
     USERNAME_FIELD="username"
+    REQUIRED_FIELDS=['email']
 
 
 

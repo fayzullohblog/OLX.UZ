@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Category(BaseModel):
-    user=models.ForeignKey(User,on_delete=models.PROTECT)
+    # user=models.ForeignKey(User,on_delete=models.PROTECT)
 
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to="main_category")
